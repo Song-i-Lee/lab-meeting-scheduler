@@ -11,6 +11,9 @@ st.title("📅 랩미팅 스케줄 에이전트")
 # -------------------------
 st.sidebar.header("⚙️ 설정")
 
+st.sidebar.markdown("### 📅 날짜 선택")
+selected_date = st.sidebar.date_input("랩미팅 날짜")
+
 start_time = st.sidebar.time_input("시작 시간", datetime.strptime("13:00", "%H:%M"))
 end_time = st.sidebar.time_input("종료 시간", datetime.strptime("16:30", "%H:%M"))
 
@@ -167,3 +170,14 @@ with col2:
 
             else:
                 st.error("가능한 스케줄을 찾을 수 없습니다")
+# -------------------------
+# 복사용 텍스트 생성
+# -------------------------
+schedule_text = "[랩미팅 일정]\n"
+
+for (s, e), person in result:
+    schedule_text += f"{s.strftime('%H:%M')} ~ {e.strftime('%H:%M')}  {person}\n"
+
+st.markdown("### 📋 복사용 텍스트")
+
+st.code(schedule_text, language="text")
