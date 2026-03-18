@@ -167,17 +167,17 @@ with col2:
                         """,
                         unsafe_allow_html=True
                     )
+                # -------------------------
+                # 복사용 텍스트 생성
+                # -------------------------
+                schedule_text = "[랩미팅 일정]\n"
+
+                for (s, e), person in result:
+                    schedule_text += f"{s.strftime('%H:%M')} ~ {e.strftime('%H:%M')}  {person}\n"
+                
+                st.markdown("### 📋 복사용 텍스트")
+                
+                st.code(schedule_text, language="text")
 
             else:
                 st.error("가능한 스케줄을 찾을 수 없습니다")
-# -------------------------
-# 복사용 텍스트 생성
-# -------------------------
-schedule_text = "[랩미팅 일정]\n"
-
-for (s, e), person in result:
-    schedule_text += f"{s.strftime('%H:%M')} ~ {e.strftime('%H:%M')}  {person}\n"
-
-st.markdown("### 📋 복사용 텍스트")
-
-st.code(schedule_text, language="text")
